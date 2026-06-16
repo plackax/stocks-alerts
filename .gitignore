@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+*.log
+.expo/
+.DS_Store
+android/
+ios/
+*.apk
+*.mp4
+*.keystore
+.claude/
+.aidev/
+DesignliStocks-release.apk
+DesignliStocks-demo.mp4

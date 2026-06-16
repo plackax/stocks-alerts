@@ -1,0 +1,69 @@
+{
+  "expo": {
+    "name": "Designli Stocks",
+    "slug": "designli-stocks",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "designlistocks",
+    "userInterfaceStyle": "dark",
+    "icon": "./assets/icon.png",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.jr.designli",
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true
+        }
+      }
+    },
+    "android": {
+      "package": "com.jr.designli",
+      "googleServicesFile": "./google-services.json",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#0f0f0f"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#ffffff"
+        }
+      ],
+      "expo-asset",
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0f0f0f",
+          "image": "./assets/icon.png",
+          "imageWidth": 180
+        }
+      ],
+      "expo-font",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          },
+          "ios": {
+            "useFrameworks": "static",
+            "forceStaticLinking": ["RNFBApp", "RNFBMessaging"],
+            "buildReactNativeFromSource": true
+          }
+        }
+      ],
+      "@react-native-firebase/app",
+      "./plugins/withAndroidFcmManifestFix"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

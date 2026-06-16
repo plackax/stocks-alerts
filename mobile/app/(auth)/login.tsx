@@ -1,0 +1,164 @@
+import { useState } from 'react';
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import axios from 'axios';
+import { useRouter } from 'expo-router';
+import { colors } from '../../constants/theme';
+import { useAuth } from '../../hooks/useAuth';
+
+export default function LoginScreen() {
+  const { login } = useAuth();
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!email || !password) {
+      setError('Enter your email and password.');
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    try {
+      await login(email.trim(), password);
+    } catch (err) {
+      if (axios.isAxiosError(err) && err.response?.status === 401) {
+        setError('Invalid email or password.');
+      } else {
+        setError('Unable to sign in. Check your connection and try again.');
+      }
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <View style={styles.content}>
+        <Text style={styles.title}>Designli Stocks</Text>
+        <Text style={styles.subtitle}>Sign in to track real-time prices</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          placeholderTextColor={colors.textMuted}
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
+          editable={!submitting}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor={colors.textMuted}
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+          editable={!submitting}
+        />
+
+        {error ? <Text style={styles.error}>{error}</Text> : null}
+
+        <TouchableOpacity
+          style={[styles.button, submitting && styles.buttonDisabled]}
+          onPress={handleSubmit}
+          disabled={submitting}
+          accessibilityRole="button"
+        >
+          {submitting ? (
+            <ActivityIndicator color={colors.background} />
+          ) : (
+            <Text style={styles.buttonLabel}>Sign In</Text>
+          )}
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.linkRow}
+          onPress={() => router.push('/(auth)/register')}
+          accessibilityRole="button"
+        >
+          <Text style={styles.link}>Don't have an account? Sign up</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  content: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 24,
+  },
+  title: {
+    color: colors.text,
+    fontSize: 28,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: colors.textMuted,
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 6,
+    marginBottom: 28,
+  },
+  input: {
+    backgroundColor: colors.surface,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.border,
+    color: colors.text,
+    fontSize: 16,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    marginBottom: 12,
+  },
+  error: {
+    color: colors.negative,
+    fontSize: 13,
+    marginBottom: 12,
+  },
+  button: {
+    backgroundColor: colors.accent,
+    borderRadius: 10,
+    paddingVertical: 16,
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
+  buttonLabel: {
+    color: colors.background,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  linkRow: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  link: {
+    color: colors.accent,
+    fontSize: 14,
+    fontWeight: '600',
+  },
+});

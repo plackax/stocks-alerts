@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561118098790",
+    "project_id": "designlitest-2f71d",
+    "storage_bucket": "designlitest-2f71d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561118098790:android:b8a4d16a037ac5683e04a7",
+        "android_client_info": {
+          "package_name": "com.jr.designli"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzfZ2VAufddQSuRd-_J8LAG2uuZQFZNhA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
