@@ -1,5 +1,5 @@
 {
-  "name": "prueba2-backend",
+  "name": "designli-stocks-backend",
   "version": "1.0.0",
   "description": "Stock price alert system with real-time prices and FCM push notifications",
   "private": true,

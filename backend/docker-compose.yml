@@ -7,7 +7,7 @@ services:
     environment:
       DATABASE_HOST: db
       DATABASE_PORT: 5432
-      DATABASE_NAME: prueba2
+      DATABASE_NAME: designli_stocks
       DATABASE_USER: postgres
       DATABASE_PASSWORD: postgres
       JWT_SECRET: ${JWT_SECRET:-change-me-before-deploy}
@@ -21,7 +21,7 @@ services:
   db:
     image: postgres:16-alpine
     environment:
-      POSTGRES_DB: prueba2
+      POSTGRES_DB: designli_stocks
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:

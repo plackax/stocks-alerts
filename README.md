@@ -14,7 +14,7 @@ npm install
 npm run android          # or: npm run ios
 ```
 
-`npm run android` / `npm run ios` produce a local native build (not Expo Go — that's required for FCM push to work). A prebuilt `DesignliStocks-release.apk` and a `DesignliStocks-demo.mp4` are also in the repo root if you just want to install and watch.
+`npm run android` / `npm run ios` produce a local native build (not Expo Go — that's required for FCM push to work). A prebuilt `DesignliStocks-release.apk` and a demo video are provided separately with the submission if you just want to install and watch.
 
 Demo login: `test@test.com` / `Test1234!`
 
